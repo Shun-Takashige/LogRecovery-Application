@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang = "ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>LogRecovery</title>
+        <!-- Import Styles -->
+        <link rel="stylesheet" href="./assets/styles.css" />
+        <!-- Import Vue.js -->
+        <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="drop_area"
+            @dragenter = "dragEnter"
+            @dragleave = "dragLeave"
+            @dragover.prevent
+            @drop.prevent
+            @drop = "dropFile"
+            :class = "{enter: isEnter}"
+            >
+                ファイルアップロード
+            </div>
+            <div>
+                <ul>
+                    <li v-for = "file in files">{{file.name}}</li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- Import App -->
+        <script src="./main.js"></script>
+
+        <!-- Mount App -->
+        <script>
+            const mountedApp = app.mount('#app')
+        </script>
+    </body>
+</html>

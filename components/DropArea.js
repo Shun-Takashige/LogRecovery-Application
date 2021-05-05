@@ -1,0 +1,3 @@
+app.component('drop-area', {
+    
+})
