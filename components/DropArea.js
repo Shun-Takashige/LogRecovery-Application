@@ -1,3 +1,0 @@
-app.component('drop-area', {
-    
-})

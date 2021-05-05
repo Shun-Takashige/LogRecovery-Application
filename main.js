@@ -2,7 +2,9 @@ const app = Vue.createApp({
     data(){
         return{
             isEnter: false,
-            files: []
+            files: [],
+            isoutputData: false,
+            outputfiles: []
         }
     },
     methods:{
@@ -13,8 +15,17 @@ const app = Vue.createApp({
             this.isEnter = false;
         },
         dropFile(){
-            this.files = [...event.dataTransfer.files]
+            this.files.push(...event.dataTransfer.files)
             this.isEnter = false;
+        },
+        onChange(){
+            this.files.push(...event.target.files)
+        },
+        outputData(){
+            this.outputfiles = this.files;
+            this.files = [];
+            this.isoutputData = true;
+
         }
     }
 })

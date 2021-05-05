@@ -14,17 +14,26 @@
             @dragenter = "dragEnter"
             @dragleave = "dragLeave"
             @dragover.prevent
-            @drop.prevent
-            @drop = "dropFile"
+            @drop.prevent = "dropFile"
             :class = "{enter: isEnter}"
             >
-                ファイルアップロード
+                <input type="file" title @change="onChange">
+                <p>ファイルをドラック&ドロップ
+                    <br>またはクリックでファイルを選択
+                </p>
             </div>
+
             <div>
                 <ul>
                     <li v-for = "file in files">{{file.name}}</li>
 
                 </ul>
+            </div>
+            <div v-show="files.length">
+                <button class="button" @click = "outputData" >決定</button>
+            </div>
+            <div v-if = "isoutputData">
+                <p>あああ</p>
             </div>
         </div>
 
