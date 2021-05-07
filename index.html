@@ -17,7 +17,7 @@
             @drop.prevent = "dropFile"
             :class = "{enter: isEnter}"
             >
-                <input type="file" title @change="onChange">
+                <input type="file" title @change="onChange" id = "file1">
                 <p>ファイルをドラック&ドロップ
                     <br>またはクリックでファイルを選択
                 </p>
@@ -29,11 +29,11 @@
 
                 </ul>
             </div>
-            <div v-show="files.length">
-                <button class="button" @click = "outputData" >決定</button>
+            <div>
+                <button class="button" id = "button1">決定</button>
             </div>
-            <div v-if = "isoutputData">
-                <p>あああ</p>
+            <div>
+                <textarea id = "textarea"></textarea>
             </div>
         </div>
 
