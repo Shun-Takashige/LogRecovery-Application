@@ -22,19 +22,6 @@ const app = Vue.createApp({
         onChange(){
             this.files.push(...event.target.files)
         },
-        // outputData(){
-        //     file = this.files[0];
-        //     const reader = new FileReader()
-        //     reader.readAsText(file)
-        //     reader.onload = function(event){
-        //         const textarea = document.getElementById('textarea');
-        //         textarea.innerHTML = reader.result;
-        //         console.log(textarea)
-        //         this.isoutputData = true;
-        //     }
-        //     this.files = []
-            
-        // }
         outputData(){
             this.txt_list = [];
             this.name_list =[];
@@ -47,11 +34,42 @@ const app = Vue.createApp({
                 reader.readAsText(this.files[i])
                 reader.onload = (event)=>{
                     var result = reader.result;
-                    this.txt_list.push(result);
-                    this.isoutputData = true;
+                    var txt = this.arrangeText(result);
+                    console.log(txt);
+                    this.txt_list.push(txt);
                 }
             }
+
             this.files = [];
         },
+        arrangeText(result){
+            const lines = result.split(/\s/);
+            // const tmp = result.split(" ");
+            // var lines =[]
+            // for(let i = 0; i < tmp.length; i++){
+            //     var buf = tmp[i].split("\n");
+            //     for(let j = 0; j < buf.length; ++j){
+            //         lines.push(buf[j]);
+            //     }
+            // }
+            console.log(lines);
+            const temp_time = /^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
+            var txt = [];
+            // var times =[];
+            // var speakers =[];
+            // var receivers = [];
+            // var contents = [];
+            // var name = [];
+            // var time = [];
+            // var content = [];
+            
+            let index = 0;
+
+            while(index < lines.length){
+                txt.push(temp_time.test(lines[index]));
+                index++;
+            }
+            return txt;
+        }
     }
 })
