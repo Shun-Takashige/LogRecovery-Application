@@ -4,7 +4,8 @@ const app = Vue.createApp({
             isEnter: false,
             files: [],
             isoutputData: false,
-            txt_list: []
+            name_list: [],
+            txt_list:[]
         }
     },
     methods:{
@@ -21,62 +22,36 @@ const app = Vue.createApp({
         onChange(){
             this.files.push(...event.target.files)
         },
-        outputData(){
-            file = this.files[0];
-            const reader = new FileReader()
-            reader.readAsText(file)
-            reader.onload = function(event){
-                this.txt = event.target.result;
-                console.log(this.txt)
-            }
-            this.files = []
-            this.isoutputData = true;
-        }
         // outputData(){
-        //     this.txt_lists = [];
-        //     for(let i in this.files){
-        //         console.log(this.files[i].name);
-        //         console.log(this.files[i].size);
-        //         console.log(this.files[i].type);
-        //         const reader = new FileReader() 
-        //         reader.readAsText(this.files[i])
-        //         reader.onload = function(event){
-        //             var txt = event.target.result;
-        //             this.isoutputData = true;
-        //         }
+        //     file = this.files[0];
+        //     const reader = new FileReader()
+        //     reader.readAsText(file)
+        //     reader.onload = function(event){
+        //         const textarea = document.getElementById('textarea');
+        //         textarea.innerHTML = reader.result;
+        //         console.log(textarea)
+        //         this.isoutputData = true;
         //     }
-        //     this.files = [];
-        //     this.isoutputData = true;
-        // },
-        // makeList(txt){
-        //     this.txt_list.push(txt);
-        //     console.log(txt);
+        //     this.files = []
+            
         // }
+        outputData(){
+            this.txt_list = [];
+            this.name_list =[];
+            for(let i in this.files){
+                console.log(this.files[i].name);
+                console.log(this.files[i].size);
+                console.log(this.files[i].type);
+                this.name_list.push(this.files[i].name);
+                const reader = new FileReader() 
+                reader.readAsText(this.files[i])
+                reader.onload = (event)=>{
+                    var result = reader.result;
+                    this.txt_list.push(result);
+                    this.isoutputData = true;
+                }
+            }
+            this.files = [];
+        },
     }
 })
-
-
-
-window.addEventListener('load', () => {
-    const f = document.getElementById('file1');
-    f.addEventListener('change', evt => {
-        const btn = document.getElementById('button1');
-        btn.addEventListener('click', ()=>{
-            let input = evt.target;
-            if (input.files.length == 0) {
-                console.log('No file selected');
-                return;
-            }
-            
-            const file = input.files[0];
-            const reader = new FileReader();
-            reader.onload = () => {
-                const textarea = document.getElementById('textarea');
-                textarea.innerHTML = reader.result;
-            };
-        
-            reader.readAsText(file);
-            });
-        })
-      
-  });

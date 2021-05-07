@@ -30,10 +30,11 @@
                 </ul>
             </div>
             <div>
-                <button class="button" id = "button1">決定</button>
+                <button class="button" id = "button1" @click = "outputData">決定</button>
             </div>
             <div>
-                <textarea id = "textarea"></textarea>
+                <p v-for = "name in name_list">{{name}}</p>
+                <textarea v-for = "txt in txt_list">{{txt}}</textarea>
             </div>
         </div>
 
