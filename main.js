@@ -4,6 +4,7 @@ const app = Vue.createApp({
             isEnter: false,
             files: [],
             txt_list:[],
+            CheckOutput: false,
             // isoutputData: false,
             filename_list: [],
             times_list: [],
@@ -30,16 +31,15 @@ const app = Vue.createApp({
             this.txt_list = [];
             this.filename_list =[];
             for(let i in this.files){
-                console.log(this.files[i].name);
-                console.log(this.files[i].size);
-                console.log(this.files[i].type);
+                // console.log(this.files[i].name);
+                // console.log(this.files[i].size);
+                // console.log(this.files[i].type);
                 this.filename_list.push(this.files[i].name);
                 const reader = new FileReader() 
                 reader.readAsText(this.files[i])
                 reader.onload = (event)=>{
                     var result = reader.result;
-                    var txt = this.arrangeText(result);
-                    console.log(txt);
+                    this.arrangeText(result);
                 }
             }
 
@@ -57,7 +57,7 @@ const app = Vue.createApp({
                     result_split_by_time.push(result_split_by_time2[j]);
                 }
             }
-            console.log(result_split_by_time);
+            // console.log(result_split_by_time);
             
 
             var name = "";//nameに関する情報の一時保存
@@ -77,7 +77,7 @@ const app = Vue.createApp({
             var result_split; //result_split_by_time[i]をさらに切り分けたもの。
             
             for(let i = 0; i < result_split_by_time.length; ++i){
-                console.log(state);
+                // console.log(state);
                 if(time1.test(result_split_by_time[i]) || time2.test(result_split_by_time[i])){
                     time = result_split_by_time[i];
                     state = 1;
@@ -104,6 +104,7 @@ const app = Vue.createApp({
                                 state = 3;
                             }else if(result_split[j] == ":"){
                                 speakers.push(name);
+                                listeners.push("Unknown")
                                 name = "";
                                 content2 = "";
                                 state = 4;
@@ -152,14 +153,33 @@ const app = Vue.createApp({
             this.speakers_list.push(speakers);
             this.listeners_list.push(listeners);
             this.contents_list.push(contents);
-
-            console.log(times);
-            console.log(speakers);
-            console.log(listeners);
-            console.log(contents);
-            
-            var　txt =[];
-            return txt;
+            // console.log(times);
+            // console.log(speakers);
+            // console.log(listeners);
+            // console.log(contents);
+        }
+    },
+    computed: {
+        file_info_list(){
+            var file_info_list = [];
+            for(let i = 0; i < this.times_list.length; ++i){
+               var file_info = {
+                   filename : this.filename_list[i],
+                   times : this.times_list[i],
+                   speakers : this.speakers_list[i],
+                   listeners : this.listeners_list[i],
+                   contents :this.contents_list[i]
+               }
+               console.log(file_info);
+               file_info_list.push(file_info);
+            }
+            console.log(file_info_list.length);
+            return file_info_list;
+        },
+        calc_input(){//いらないかもしれない。
+            if(this.times_list.length === this.files.length){
+                this.CheckOutput = true;
+            }
         }
     }
 })

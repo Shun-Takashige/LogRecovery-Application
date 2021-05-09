@@ -32,15 +32,17 @@
             <div>
                 <button class="button" id = "button1" @click = "outputData">決定</button>
             </div>
-            <div>
-                <p v-for = "name in filename_list">{{name}}</p>
-                <p v-for = "txt in txt_list">{{txt}}</p>
+            <div class = "chat-list" v-if = "CheckOutput"><!-- このifはいらないかもしれない-->
+                <li v-for = "file_info in file_info_list">
+                    <chat-container :file_info = "file_info"></chat-container>
+                </li>
             </div>
         </div>
 
         <!-- Import App -->
         <script src="./main.js"></script>
-
+        <script src="./components/ChatContainer.js"></script>
+        <script src="./components/ChatBox.js"></script>
         <!-- Mount App -->
         <script>
             const mountedApp = app.mount('#app')
