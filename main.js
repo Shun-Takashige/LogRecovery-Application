@@ -4,7 +4,7 @@ const app = Vue.createApp({
             isEnter: false,
             files: [],
             txt_list:[],
-            CheckOutput: false,
+            CheckOutput: true,
             // isoutputData: false,
             filename_list: [],
             times_list: [],
@@ -176,10 +176,11 @@ const app = Vue.createApp({
             console.log(file_info_list.length);
             return file_info_list;
         },
-        calc_input(){//いらないかもしれない。
-            if(this.times_list.length === this.files.length){
-                this.CheckOutput = true;
-            }
-        }
+        // calc_input(){//いらないかもしれない。
+        //     console.log("Yes")
+        //     if(this.times_list.length === this.files.length){
+        //         this.CheckOutput = true;
+        //     }
+        // }
     }
 })

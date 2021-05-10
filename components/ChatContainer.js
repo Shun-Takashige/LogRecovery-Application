@@ -12,12 +12,6 @@ app.component('chat-container',{
         <div class = "chat_title">
             {{file_info.filename}}
         </div>
-        <div class = "check_person" v-if = "check_prepare">
-            <p>自分のアカウント名を選んでください。もし入力したくない場合は、入力しないを選んでください。何かしらを選ぶことが必須となります。</p>
-            <form name = "form1" action = "">
-                <select id = "SelectMe" onChange = "select_me" required></select><!--もし何かしら不具合が起こったらいったんrequiredは外す-->
-            </form>
-        </div>
         <div v-if = "start_display">
             <chat-box v-for = "box_info in box_info_list" v-bind:box_info = "box_info" check_me = "check_me"></chat-box>
         </div>
@@ -28,7 +22,7 @@ app.component('chat-container',{
             check_me : "", 
             NameChoice :[],
             check_prepare: false,
-            start_display: false
+            start_display: true
         }
     },
     methods:{
@@ -51,6 +45,7 @@ app.component('chat-container',{
                 }
                 box_info_list.push(box_info);
             }
+            console.log(box_info_list);
             return box_info_list;
         },
         name_choice(){

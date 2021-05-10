@@ -1,3 +1,15 @@
+@media screen and (max-width: 480px){
+    .chat-list .chat-container {
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 481px){
+    .chat-list .chat-container {
+        max-width: 80%;
+    }
+}
+
 body {
     height: 100%;
 }
@@ -62,3 +74,121 @@ ul {
     text-align: center;
     cursor: pointer;
   }
+
+
+
+.chat-list .chat-container {
+    padding:0;
+    background: #ffffff;
+    overflow: hidden;
+    margin: 20px auto;
+    font-size: 80%;
+    border: 2px solid;
+    border-color: #000044;/*あとで必要なさそうだったら消す。*/
+}
+
+.chat-list .chat-container .chat_title {
+    background: #000044;
+    padding: 10px;
+    text-align: center;
+    font-size: 150%;
+    color: #ffffff;
+}
+
+.chat-list .chat-container .chat-box {
+    padding: 10px;
+    overflow: hidden;
+    line-height: 135%;
+}
+
+.chat-list .chat-container .chat-box .chat_left{
+    width: 100%;
+    position: relative;
+    display: block;
+    margin-bottom: 5px;
+    max-width: 80%;
+    clear: both;
+}
+
+.chat-list .chat-container .chat-box .chat_left  .chat_text {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+  
+.chat-list .chat-container .chat-box .chat_left  .chat_text .name {
+    font-size: 80%;
+}
+
+.chat-list .chat-container .chat-box .chat_left  .chat_text .time {
+    font-size: 80%;
+}
+  /* コメントエリア */
+.chat-list .chat-container .chat-box .chat_left  .chat_text .content {
+    margin: 0;
+    position: relative;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #EEEEEE;
+    display: inline-block;
+}
+  
+/* 吹き出し */
+.chat-list .chat-container .chat-box .chat_left .chat_text .content::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    left: -10px;
+    top: 10px;
+    border-right: 20px solid #EEEEEE;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+
+
+/* 自分の会話 */
+.chat-list .chat-container .chat-box .chat_right  {
+    position: relative;
+    display: block;
+    margin: 5px 0;
+    max-width: 75%;
+    float: right;
+    margin-right: 15px;
+    clear: both;
+}
+
+.chat-list .chat-container .chat-box .chat_right  .chat_text .name {
+    font-size: 80%;
+}
+
+.chat-list .chat-container .chat-box .chat_right  .chat_text .time {
+    font-size: 80%;
+}
+
+/* コメントエリア */
+.chat-list .chat-container .chat-box .chat_right .chat_text .content {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #0099FF;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* 吹き出し */
+.chat-list .chat-container .chat-box .chat_right .chat_text .content::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  right: -10px;
+  bottom: 10px;
+  border-left: 20px solid #0099FF;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+  

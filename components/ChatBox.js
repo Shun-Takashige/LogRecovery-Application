@@ -1,7 +1,7 @@
 app.component('chat-box',{
     props:{
         box_info:{
-            type: Array,
+            type: Object,
             required: true
         },
         check_me:{
