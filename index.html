@@ -2,6 +2,7 @@
 <html lang = "ja">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>LogRecovery</title>
         <!-- Import Styles -->
         <link rel="stylesheet" href="./assets/styles.css" />
@@ -23,19 +24,19 @@
                 </p>
             </div>
 
-            <div>
+            <div class ="display_filenames">
                 <ul>
                     <li v-for = "file in files">{{file.name}}</li>
 
                 </ul>
             </div>
-            <div>
+            <div class ="button_wrapper">
                 <button class="button" id = "button1" @click = "outputData">決定</button>
             </div>
             <div class = "chat-list" v-if = "CheckOutput"><!-- このifはいらないかもしれない-->
-                <li v-for = "file_info in file_info_list">
+                <ul v-for = "file_info in file_info_list">
                     <chat-container :file_info = "file_info"></chat-container>
-                </li>
+                </ul>
             </div>
         </div>
 
