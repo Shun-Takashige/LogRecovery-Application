@@ -4,8 +4,8 @@ app.component('chat-box',{
             type: Object,
             required: true
         },
-        check_me:{
-            type: String,
+        display_name:{
+            type: Boolean,
             required: true
         }
     },
@@ -13,17 +13,17 @@ app.component('chat-box',{
     /*html*/
     `
     <div class = "chat-box">
-        <div class="chat_left" v-if = "check_me !== box_info.name">
+        <div class="chat_right" v-if = "box_info.my_name == box_info.speaker">
             <div class = "chat_text">
                 <div class="time">{{box_info.time}}</div>
-                <div class="name">{{FromSpeakerToListener}}</div>
+                <div class="name" v-if = "display_name">{{FromSpeakerToListener}}</div>
                 <div class="content">{{box_info.content}}</div>
             </div>
         </div>
-        <div class="chat_right" v-else>
+        <div class="chat_left" v-else>
             <div class = "chat_text">
                 <div class="time">{{box_info.time}}</div>
-                <div class="name">{{FromSpeakerToListener}}</div>
+                <div class="name" v-if = "display_name">{{FromSpeakerToListener}}</div>
                 <div class="content">{{box_info.content}}</div>
             </div>
         </div>

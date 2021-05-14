@@ -24,18 +24,17 @@
                 </p>
             </div>
 
-            <div class ="display_filenames">
-                <ul>
-                    <li v-for = "file in files">{{file.name}}</li>
-
+            <div class ="display_filenames" v-if= "candidate_me_list.length > 0"><!---->
+                <ul v-for = "name_choice in name_choice_list" :key = "name_choice.id">
+                    <setting-area :name_choice = "name_choice" v-on:my_info = "MyNameList"></setting-area>
                 </ul>
             </div>
             <div class ="button_wrapper">
-                <button class="button" id = "button1" @click = "outputData">決定</button>
+                <button class="button" id = "button1" @click = "StartDisplay">決定</button>
             </div>
             <div class = "chat-list" v-if = "CheckOutput"><!-- このifはいらないかもしれない-->
                 <ul v-for = "file_info in file_info_list">
-                    <chat-container :file_info = "file_info"></chat-container>
+                    <chat-container :file_info = "file_info" display_name = "display_name"></chat-container>
                 </ul>
             </div>
         </div>
@@ -44,6 +43,7 @@
         <script src="./main.js"></script>
         <script src="./components/ChatContainer.js"></script>
         <script src="./components/ChatBox.js"></script>
+        <script src="./components/Settingarea.js"></script>
         <!-- Mount App -->
         <script>
             const mountedApp = app.mount('#app')

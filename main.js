@@ -4,8 +4,13 @@ const app = Vue.createApp({
             isEnter: false,
             files: [],
             txt_list:[],
-            CheckOutput: true,
+            CheckOutput: false,
             // isoutputData: false,
+
+            candidate_me_list: [],
+            my_name_list:[],
+            display_name: false,
+
             filename_list: [],
             times_list: [],
             speakers_list: [],
@@ -21,31 +26,37 @@ const app = Vue.createApp({
             this.isEnter = false;
         },
         dropFile(){
-            this.files.push(...event.dataTransfer.files)
+            var selected_files = []
+            selected_files.push(...event.dataTransfer.files);
+            this.files.push(...event.dataTransfer.files);
             this.isEnter = false;
+
+            for(let i in selected_files){
+                this.outputData(selected_files[i]);
+            }
+            
         },
         onChange(){
-            this.files.push(...event.target.files)
-        },
-        outputData(){
-            this.txt_list = [];
-            this.filename_list =[];
-            for(let i in this.files){
-                // console.log(this.files[i].name);
-                // console.log(this.files[i].size);
-                // console.log(this.files[i].type);
-                this.filename_list.push(this.files[i].name);
-                const reader = new FileReader() 
-                reader.readAsText(this.files[i])
-                reader.onload = (event)=>{
-                    var result = reader.result;
-                    this.arrangeText(result);
-                }
+            var selected_files = [];
+            selected_files.push(...event.target.files);
+            this.files.push(...event.target.files);
+            console.log(selected_files)
+            console.log(this.files)
+            for(let i in selected_files){
+                this.outputData(selected_files[i]);
             }
-
-            this.files = [];
+        },
+        outputData(file){
+            this.filename_list.push(file.name);
+            const reader = new FileReader() 
+            reader.readAsText(file)
+            reader.onload = (event)=>{
+                var result = reader.result;
+                this.arrangeText(result);
+            }
         },
         arrangeText(result){
+            console.log(result);
             const time1 = /([01][0-9]:[0-5][0-9]:[0-5][0-9])/g;//00:00:00~19:59:59を分割
             const time2 = /([2][0-3]:[0-5][0-9]:[0-5][0-9])/g;//20:00:00~23:59:59を分割
             const result_split_by_time1 = result.split(time1);
@@ -153,10 +164,45 @@ const app = Vue.createApp({
             this.speakers_list.push(speakers);
             this.listeners_list.push(listeners);
             this.contents_list.push(contents);
-            // console.log(times);
-            // console.log(speakers);
-            // console.log(listeners);
-            // console.log(contents);
+
+            this.nameChoice(speakers);
+            console.log(this.candidate_me_list);
+            console.log(this.times_list);
+            console.log(this.speakers_list);
+            console.log(this.listeners_list);
+            console.log(this.contents_list);
+
+        },
+        nameChoice(speakers){
+            candidate_me = [];
+            for(let i = 0; i < speakers.length; ++i){
+                var check = true;
+                for(let j = 0; j < candidate_me.length; ++j){
+                    if(speakers[i] === candidate_me[j]) check = false;
+                }
+                if(check) candidate_me.push(speakers[i]);
+                console.log(candidate_me);
+            }
+            
+            this.candidate_me_list.push(candidate_me);
+            // console.log(this.candidate_me_list);
+        },
+        StartDisplay(){
+            this.CheckOutput = true;
+        },
+        MyNameList(my_info){
+            // console.log("Yes")
+            // var a = []
+            // a.push(my_info);
+            // console.log(a);
+            if(this.my_name_list.length>my_info.index){
+                this.my_name_list[my_info.index] = my_info.name
+            }
+            else{
+                this.my_name_list.push(my_info.name);
+                this.display_name = my_info.display_name;
+            }
+            
         }
     },
     computed: {
@@ -168,7 +214,8 @@ const app = Vue.createApp({
                    times : this.times_list[i],
                    speakers : this.speakers_list[i],
                    listeners : this.listeners_list[i],
-                   contents :this.contents_list[i]
+                   contents :this.contents_list[i],
+                   my_name: this.my_name_list[i]
                }
                console.log(file_info);
                file_info_list.push(file_info);
@@ -176,11 +223,20 @@ const app = Vue.createApp({
             console.log(file_info_list.length);
             return file_info_list;
         },
-        // calc_input(){//いらないかもしれない。
-        //     console.log("Yes")
-        //     if(this.times_list.length === this.files.length){
-        //         this.CheckOutput = true;
-        //     }
-        // }
+        name_choice_list(){
+            console.log("YES")
+            var name_choice_list = [];
+            for(let i = 0; i < this.candidate_me_list.length; ++i){
+                var name_choice ={
+                    filename :this.filename_list[i],
+                    candidate : this.candidate_me_list[i],
+                    index : i
+                }
+                name_choice_list.push(name_choice);
+            }
+            console.log(name_choice_list);
+            return name_choice_list;
+        },
+       
     }
 })
