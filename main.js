@@ -185,16 +185,11 @@ const app = Vue.createApp({
             }
             
             this.candidate_me_list.push(candidate_me);
-            // console.log(this.candidate_me_list);
         },
         StartDisplay(){
             this.CheckOutput = true;
         },
         MyNameList(my_info){
-            // console.log("Yes")
-            // var a = []
-            // a.push(my_info);
-            // console.log(a);
             if(this.my_name_list.length>my_info.index){
                 this.my_name_list[my_info.index] = my_info.name
             }
