@@ -190,6 +190,7 @@ const app = Vue.createApp({
             this.CheckOutput = true;
         },
         MyNameList(my_info){
+            console.log(my_info);
             if(this.my_name_list.length>my_info.index){
                 this.my_name_list[my_info.index] = my_info.name
             }

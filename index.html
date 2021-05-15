@@ -34,7 +34,7 @@
             </div>
             <div class = "chat-list" v-if = "CheckOutput"><!-- このifはいらないかもしれない-->
                 <ul v-for = "file_info in file_info_list">
-                    <chat-container :file_info = "file_info" display_name = "display_name"></chat-container>
+                    <chat-container :file_info = "file_info" v-bind:display_name = "display_name"></chat-container>
                 </ul>
             </div>
         </div>

@@ -40,7 +40,16 @@ app.component('setting-area',{
     },
     methods:{
         DisplayName(){
-            if(this.picked == "No")this.display_name = false;
+            if(this.picked == "No"){
+                this.display_name = false;
+                this.selected_me = "";
+                var my_info ={
+                    name: this.selected_me,
+                    index:this.name_choice.index,
+                    display_name : this.display_name
+                }
+                this.$emit("my_info", my_info);
+            }
             if(this.picked == "Yes"){
                 if(!this.check_make_list){
                     var Element = document.getElementById('select');
